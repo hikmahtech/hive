@@ -1,0 +1,38 @@
+<configuration>
+    <!-- <property>
+        <name>fs.default.name</name>
+        <value>http://192.168.1.140:9000/</value>
+    </property> -->
+    <property>
+        <name>mapreduce.outputcommitter.factory.scheme.s3a</name>
+        <value>org.apache.Hadoop.fs.s3a.commit.S3ACommitterFactory</value>
+    </property>
+    <property>
+        <name>fs.s3a.committer.name</name>
+        <value>directory</value>
+    </property>
+    <property>
+        <name>fs.s3a.access.key</name>
+        <value>minio</value>
+    </property>
+    <property>
+        <name>fs.s3a.secret.key</name>
+        <value>minio123</value>
+    </property>
+    <property>
+        <name>fs.s3a.endpoint</name>
+        <value>http://192.168.1.140:9000</value>
+    </property>
+    <property>
+        <name>fs.s3a.path.style.access</name>
+        <value>true</value>
+    </property>
+    <property>
+        <name>fs.s3a.connection.ssl.enabled</name>
+        <value>false</value>
+    </property>
+    <property>
+        <name>fs.s3a.impl</name>
+        <value>org.apache.hadoop.fs.s3a.S3AFileSystem</value>
+    </property>
+</configuration>

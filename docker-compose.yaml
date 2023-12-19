@@ -1,0 +1,32 @@
+version: '3.9'
+services:
+  metastore:
+    image: arshadansari27/hive:4.0.0-beta-1
+    restart: unless-stopped
+    container_name: metastore
+    hostname: metastore
+    environment:
+      DB_DRIVER: postgres
+      SERVICE_NAME: 'metastore'
+      SERVICE_OPTS: '-Xmx1G'
+    volumes:
+      - /home/arshad/Debian-NFS/warehouse:/opt/hive/data/warehouse
+    ports:
+      - '9083:9083'
+
+  hiveserver2:
+    image: arshadansari27/hive:4.0.0-beta-1
+    depends_on:
+      - metastore
+    restart: unless-stopped
+    container_name: hiveserver2
+    environment:
+      HIVE_SERVER2_THRIFT_PORT: 10000
+      SERVICE_OPTS: '-Xmx1G -Dhive.metastore.uris=thrift://metastore:9083'
+      IS_RESUME: 'true'
+      SERVICE_NAME: 'hiveserver2'
+    volumes:
+      - /home/arshad/Debian-NFS/warehouse:/opt/hive/data/warehouse
+    ports:
+      - '10000:10000'
+      - '10002:10002'
